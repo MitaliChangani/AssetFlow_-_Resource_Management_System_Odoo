@@ -14,6 +14,7 @@
     'data': [
         'views/allocation_views.xml',
         'views/asset_views.xml',
+        'views/audit_views.xml',
     ],
     'installable': True,
     'application': True,
