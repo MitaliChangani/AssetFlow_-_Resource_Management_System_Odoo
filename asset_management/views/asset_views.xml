@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- ASSET FORM VIEW                                               -->
-    <!-- ============================================================ -->
+    <!-- ASSET FORM VIEW -->
 
     <record id="asset_form" model="ir.ui.view">
         <field name="name">asset.asset.form</field>
@@ -114,9 +112,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET LIST VIEW                                               -->
-    <!-- ============================================================ -->
+    <!-- ASSET LIST VIEW -->
 
     <record id="asset_list" model="ir.ui.view">
         <field name="name">asset.asset.list</field>
@@ -144,9 +140,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET KANBAN VIEW                                             -->
-    <!-- ============================================================ -->
+    <!-- ASSET KANBAN VIEW -->
 
     <record id="asset_kanban" model="ir.ui.view">
         <field name="name">asset.asset.kanban</field>
@@ -193,9 +187,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET SEARCH VIEW                                             -->
-    <!-- ============================================================ -->
+    <!-- ASSET SEARCH VIEW -->
 
     <record id="asset_search" model="ir.ui.view">
         <field name="name">asset.asset.search</field>
@@ -230,9 +222,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET ACTION                                                  -->
-    <!-- ============================================================ -->
+    <!-- ASSET ACTION -->
 
     <record id="asset_action" model="ir.actions.act_window">
         <field name="name">Assets</field>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE FORM VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE FORM VIEW  -->
 
     <record id="maintenance_form" model="ir.ui.view">
         <field name="name">am.maintenance.request.form</field>
@@ -62,9 +60,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE LIST VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE LIST VIEW  -->
 
     <record id="maintenance_list" model="ir.ui.view">
         <field name="name">am.maintenance.request.list</field>
@@ -85,9 +81,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE SEARCH VIEW                                       -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE SEARCH VIEW -->
 
     <record id="maintenance_search" model="ir.ui.view">
         <field name="name">am.maintenance.request.search</field>
@@ -115,9 +109,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE ACTION                                            -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE ACTION -->
 
     <record id="maintenance_action" model="ir.actions.act_window">
         <field name="name">Maintenance Requests</field>

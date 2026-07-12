@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT CYCLE FORM VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- AUDIT CYCLE FORM VIEW -->
 
     <record id="audit_cycle_form" model="ir.ui.view">
         <field name="name">asset.audit.cycle.form</field>
@@ -83,9 +81,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT LINE LIST VIEW                                          -->
-    <!-- ============================================================ -->
+    <!-- AUDIT LINE LIST VIEW -->
 
     <record id="audit_line_list" model="ir.ui.view">
         <field name="name">asset.audit.line.list</field>
@@ -122,9 +118,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT CYCLE LIST VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- AUDIT CYCLE LIST VIEW -->
 
     <record id="audit_cycle_list" model="ir.ui.view">
         <field name="name">asset.audit.cycle.list</field>
@@ -148,9 +142,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT CYCLE SEARCH VIEW                                       -->
-    <!-- ============================================================ -->
+    <!-- AUDIT CYCLE SEARCH VIEW -->
 
     <record id="audit_cycle_search" model="ir.ui.view">
         <field name="name">asset.audit.cycle.search</field>
@@ -170,9 +162,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT ACTIONS                                                 -->
-    <!-- ============================================================ -->
+    <!-- AUDIT ACTIONS -->
 
     <record id="audit_cycle_action" model="ir.actions.act_window">
         <field name="name">Audit Cycles</field>

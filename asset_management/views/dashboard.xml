@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- ============================================================ -->
-    <!-- DASHBOARD CLIENT ACTION                                       -->
-    <!-- ============================================================ -->
+ -->
 
     <record id="action_dashboard" model="ir.actions.client">
         <field name="name">Dashboard</field>
@@ -11,9 +8,7 @@
         <field name="params" eval="{}"/>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- QUICK ACTION DIALOG: Register Asset                           -->
-    <!-- ============================================================ -->
+    <!-- QUICK ACTION DIALOG: Register Asset -->
 
     <record id="action_quick_register_asset" model="ir.actions.act_window">
         <field name="name">Register Asset</field>
@@ -22,9 +17,7 @@
         <field name="target">new</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- QUICK ACTION DIALOG: Book Resource                            -->
-    <!-- ============================================================ -->
+    <!-- QUICK ACTION DIALOG: Book Resource -->
 
     <record id="action_quick_book_resource" model="ir.actions.act_window">
         <field name="name">Book Resource</field>
@@ -33,9 +26,7 @@
         <field name="target">new</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- QUICK ACTION DIALOG: Raise Maintenance                        -->
-    <!-- ============================================================ -->
+    <!-- QUICK ACTION DIALOG: Raise Maintenance -->
 
     <record id="action_quick_maintenance" model="ir.actions.act_window">
         <field name="name">Raise Maintenance Request</field>
@@ -44,9 +35,7 @@
         <field name="target">new</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- QUICK ACTION DIALOG: Request Transfer                         -->
-    <!-- ============================================================ -->
+    <!-- QUICK ACTION DIALOG: Request Transfer -->
 
     <record id="action_quick_transfer" model="ir.actions.act_window">
         <field name="name">Request Transfer</field>

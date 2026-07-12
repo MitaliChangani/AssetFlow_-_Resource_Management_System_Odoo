@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- ADMIN AUDIT LOG (mail.message filtered to this module)        -->
-    <!-- ============================================================ -->
+    <!-- ADMIN AUDIT LOG (mail.message filtered to this module) -->
 
     <record id="mail_message_asset_log_view_form" model="ir.ui.view">
         <field name="name">mail.message.asset.log.form</field>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATION FORM VIEW                                          -->
-    <!-- ============================================================ -->
+
+    <!-- ALLOCATION FORM VIEW -->
+    
 
     <record id="allocation_form" model="ir.ui.view">
         <field name="name">asset.allocation.form</field>
@@ -48,10 +48,8 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATION LIST VIEW                                          -->
-    <!-- ============================================================ -->
-
+    <!-- ALLOCATION LIST VIEW -->
+ 
     <record id="allocation_list" model="ir.ui.view">
         <field name="name">asset.allocation.list</field>
         <field name="model">asset.allocation</field>
@@ -73,9 +71,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATION SEARCH VIEW                                        -->
-    <!-- ============================================================ -->
+    <!-- ALLOCATION SEARCH VIEW -->
 
     <record id="allocation_search" model="ir.ui.view">
         <field name="name">asset.allocation.search</field>
@@ -100,9 +96,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATION ACTION                                             -->
-    <!-- ============================================================ -->
+    <!-- ALLOCATION ACTION -->
 
     <record id="allocation_action" model="ir.actions.act_window">
         <field name="name">Allocations</field>

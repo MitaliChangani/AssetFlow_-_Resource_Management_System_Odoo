@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- MAIN MENU                                                     -->
-    <!-- ============================================================ -->
+    <!-- MAIN MENU  -->
 
     <menuitem id="menu_am_root"
         name="Asset Management"
         web_icon="asset_management,static/description/icon.png"
         sequence="40"/>
 
-    <!-- ============================================================ -->
-    <!-- DASHBOARD                                                     -->
-    <!-- ============================================================ -->
+    <!-- DASHBOARD -->
 
     <menuitem id="menu_am_dashboard"
         name="Dashboard"
@@ -20,9 +16,7 @@
         action="action_dashboard"
         sequence="10"/>
 
-    <!-- ============================================================ -->
-    <!-- ASSETS                                                        -->
-    <!-- ============================================================ -->
+    <!-- ASSETS -->
 
     <menuitem id="menu_am_assets"
         name="Assets"
@@ -47,9 +41,7 @@
         action="am_category_action"
         sequence="30"/>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATIONS & TRANSFERS                                       -->
-    <!-- ============================================================ -->
+    <!-- ALLOCATIONS & TRANSFERS -->
 
     <menuitem id="menu_am_allocations"
         name="Allocations"
@@ -91,9 +83,7 @@
         action="transfer_action_pending"
         sequence="20"/>
 
-    <!-- ============================================================ -->
-    <!-- RESOURCE BOOKING                                              -->
-    <!-- ============================================================ -->
+    <!-- RESOURCE BOOKING -->
 
     <menuitem id="menu_am_bookings"
         name="Resource Booking"
@@ -112,9 +102,7 @@
         action="booking_action_upcoming"
         sequence="20"/>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE                                                   -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE -->
 
     <menuitem id="menu_am_maintenance"
         name="Maintenance"
@@ -133,9 +121,7 @@
         action="maintenance_action_pending"
         sequence="20"/>
 
-    <!-- ============================================================ -->
-    <!-- AUDIT                                                         -->
-    <!-- ============================================================ -->
+    <!-- AUDIT -->
 
     <menuitem id="menu_am_audit"
         name="Audit"
@@ -154,9 +140,7 @@
         action="audit_line_action"
         sequence="20"/>
 
-    <!-- ============================================================ -->
-    <!-- REPORTS & ANALYTICS                                           -->
-    <!-- ============================================================ -->
+    <!-- REPORTS & ANALYTICS -->
 
     <menuitem id="menu_am_reports"
         name="Reports"
@@ -187,9 +171,7 @@
         action="booking_report_action"
         sequence="40"/>
 
-    <!-- ============================================================ -->
-    <!-- ORGANIZATION SETUP (Admin only)                               -->
-    <!-- ============================================================ -->
+    <!-- ORGANIZATION SETUP (Admin only) -->
 
     <menuitem id="menu_am_setup"
         name="Organization Setup"
@@ -214,9 +196,7 @@
         action="am_employee_action"
         sequence="30"/>
 
-    <!-- ============================================================ -->
-    <!-- ACTIVITY LOG (Admin)                                          -->
-    <!-- ============================================================ -->
+    <!-- ACTIVITY LOG (Admin) -->
 
     <menuitem id="menu_am_logs"
         name="Activity Log"

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING FORM VIEW                                             -->
-    <!-- ============================================================ -->
+    <!-- BOOKING FORM VIEW -->
 
     <record id="booking_form" model="ir.ui.view">
         <field name="name">resource.booking.form</field>
@@ -44,9 +42,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING LIST VIEW                                             -->
-    <!-- ============================================================ -->
+    <!-- BOOKING LIST VIEW  -->
 
     <record id="booking_list" model="ir.ui.view">
         <field name="name">resource.booking.list</field>
@@ -69,9 +65,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING CALENDAR VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- BOOKING CALENDAR VIEW -->
 
     <record id="booking_calendar" model="ir.ui.view">
         <field name="name">resource.booking.calendar</field>
@@ -88,9 +82,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING SEARCH VIEW                                           -->
-    <!-- ============================================================ -->
+    <!-- BOOKING SEARCH VIEW -->
 
     <record id="booking_search" model="ir.ui.view">
         <field name="name">resource.booking.search</field>
@@ -114,9 +106,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING ACTION                                                -->
-    <!-- ============================================================ -->
+    <!-- BOOKING ACTION -->
 
     <record id="booking_action" model="ir.actions.act_window">
         <field name="name">Resource Bookings</field>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- TRANSFER FORM VIEW                                            -->
-    <!-- ============================================================ -->
+    <!-- TRANSFER FORM VIEW -->
 
     <record id="transfer_form" model="ir.ui.view">
         <field name="name">asset.transfer.form</field>
@@ -44,9 +42,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- TRANSFER LIST VIEW                                            -->
-    <!-- ============================================================ -->
+    <!-- TRANSFER LIST VIEW -->
 
     <record id="transfer_list" model="ir.ui.view">
         <field name="name">asset.transfer.list</field>
@@ -67,9 +63,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- TRANSFER SEARCH VIEW                                          -->
-    <!-- ============================================================ -->
+    <!-- TRANSFER SEARCH VIEW  -->
 
     <record id="transfer_search" model="ir.ui.view">
         <field name="name">asset.transfer.search</field>
@@ -92,9 +86,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- TRANSFER ACTION                                               -->
-    <!-- ============================================================ -->
+    <!-- TRANSFER ACTION  -->
 
     <record id="transfer_action" model="ir.actions.act_window">
         <field name="name">Transfers</field>

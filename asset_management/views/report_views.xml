@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- ASSET PIVOT VIEW                                              -->
-    <!-- ============================================================ -->
+    <!-- ASSET PIVOT VIEW -->
 
     <record id="asset_pivot" model="ir.ui.view">
         <field name="name">asset.asset.pivot</field>
@@ -16,9 +14,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET GRAPH VIEW                                              -->
-    <!-- ============================================================ -->
+    <!-- ASSET GRAPH VIEW -->
 
     <record id="asset_graph" model="ir.ui.view">
         <field name="name">asset.asset.graph</field>
@@ -31,9 +27,7 @@
         </field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET REPORT ACTION                                           -->
-    <!-- ============================================================ -->
+    <!-- ASSET REPORT ACTION -->
 
     <record id="asset_report_action" model="ir.actions.act_window">
         <field name="name">Asset Report</field>
@@ -44,9 +38,7 @@
         }</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ALLOCATION PIVOT VIEW                                         -->
-    <!-- ============================================================ -->
+    <!-- ALLOCATION PIVOT VIEW -->
 
     <record id="allocation_pivot" model="ir.ui.view">
         <field name="name">asset.allocation.pivot</field>
@@ -79,9 +71,7 @@
         }</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- MAINTENANCE PIVOT VIEW                                        -->
-    <!-- ============================================================ -->
+    <!-- MAINTENANCE PIVOT VIEW -->
 
     <record id="maintenance_pivot" model="ir.ui.view">
         <field name="name">am.maintenance.request.pivot</field>
@@ -111,9 +101,7 @@
         <field name="view_mode">pivot,graph,list</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- BOOKING PIVOT VIEW (Heatmap substitute via pivot)            -->
-    <!-- ============================================================ -->
+    <!-- BOOKING PIVOT VIEW (Heatmap substitute via pivot)   -->
 
     <record id="booking_pivot" model="ir.ui.view">
         <field name="name">resource.booking.pivot</field>

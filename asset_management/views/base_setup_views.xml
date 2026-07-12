@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- DEPARTMENT VIEWS                                              -->
-    <!-- ============================================================ -->
+    <!-- DEPARTMENT VIEWS -->
 
     <record id="am_department_form" model="ir.ui.view">
         <field name="name">am.department.form</field>
@@ -57,9 +55,7 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- ASSET CATEGORY VIEWS                                          -->
-    <!-- ============================================================ -->
+    <!-- ASSET CATEGORY VIEWS -->
 
     <record id="am_category_form" model="ir.ui.view">
         <field name="name">am.category.form</field>
@@ -105,9 +101,7 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- EMPLOYEE DIRECTORY VIEWS                                      -->
-    <!-- ============================================================ -->
+    <!-- EMPLOYEE DIRECTORY VIEWS -->
 
     <record id="am_employee_form" model="ir.ui.view">
         <field name="name">am.employee.form</field>
@@ -242,9 +236,7 @@
         <field name="search_view_id" ref="am_employee_search"/>
     </record>
 
-    <!-- ============================================================ -->
-    <!-- EXTEND RES.USERS FORM TO SHOW AM ROLE                        -->
-    <!-- ============================================================ -->
+    <!-- EXTEND RES.USERS FORM TO SHOW AM ROLE -->
 
     <record id="view_users_form_am_role" model="ir.ui.view">
         <field name="name">res.users.form.am.role</field>
