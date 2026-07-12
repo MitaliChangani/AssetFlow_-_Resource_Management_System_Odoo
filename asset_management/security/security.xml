@@ -7,6 +7,11 @@
         <field name="name">Employee</field>
     </record>
 
+    <!-- Make all internal users (base.group_user) automatically members of group_employee -->
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_employee'))]"/>
+    </record>
+
     <record id="group_dept_head" model="res.groups">
         <field name="name">Department Head</field>
         <field name="implied_ids" eval="[(4, ref('group_employee'))]"/>
