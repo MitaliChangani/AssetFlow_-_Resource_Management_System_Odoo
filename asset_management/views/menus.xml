@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- MAIN MENU                                                     -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_root"
+        name="Asset Management"
+        web_icon="asset_management,static/description/icon.png"
+        sequence="40"/>
+
+    <!-- ============================================================ -->
+    <!-- DASHBOARD                                                     -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_dashboard"
+        name="Dashboard"
+        parent="menu_am_root"
+        action="action_dashboard"
+        sequence="10"/>
+
+    <!-- ============================================================ -->
+    <!-- ASSETS                                                        -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_assets"
+        name="Assets"
+        parent="menu_am_root"
+        sequence="20"/>
+
+    <menuitem id="menu_am_assets_all"
+        name="All Assets"
+        parent="menu_am_assets"
+        action="asset_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_assets_available"
+        name="Available"
+        parent="menu_am_assets"
+        action="asset_action_available"
+        sequence="20"/>
+
+    <menuitem id="menu_am_assets_categories"
+        name="Categories"
+        parent="menu_am_assets"
+        action="am_category_action"
+        sequence="30"/>
+
+    <!-- ============================================================ -->
+    <!-- ALLOCATIONS & TRANSFERS                                       -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_allocations"
+        name="Allocations"
+        parent="menu_am_root"
+        sequence="30"/>
+
+    <menuitem id="menu_am_allocations_all"
+        name="All Allocations"
+        parent="menu_am_allocations"
+        action="allocation_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_allocations_active"
+        name="Active"
+        parent="menu_am_allocations"
+        action="allocation_action_active"
+        sequence="20"/>
+
+    <menuitem id="menu_am_allocations_overdue"
+        name="Overdue"
+        parent="menu_am_allocations"
+        action="allocation_action_overdue"
+        sequence="30"/>
+
+    <menuitem id="menu_am_transfers"
+        name="Transfers"
+        parent="menu_am_root"
+        sequence="40"/>
+
+    <menuitem id="menu_am_transfers_all"
+        name="All Transfers"
+        parent="menu_am_transfers"
+        action="transfer_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_transfers_pending"
+        name="Pending"
+        parent="menu_am_transfers"
+        action="transfer_action_pending"
+        sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- RESOURCE BOOKING                                              -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_bookings"
+        name="Resource Booking"
+        parent="menu_am_root"
+        sequence="50"/>
+
+    <menuitem id="menu_am_bookings_all"
+        name="All Bookings"
+        parent="menu_am_bookings"
+        action="booking_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_bookings_upcoming"
+        name="Upcoming"
+        parent="menu_am_bookings"
+        action="booking_action_upcoming"
+        sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- MAINTENANCE                                                   -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_maintenance"
+        name="Maintenance"
+        parent="menu_am_root"
+        sequence="60"/>
+
+    <menuitem id="menu_am_maintenance_all"
+        name="All Requests"
+        parent="menu_am_maintenance"
+        action="maintenance_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_maintenance_pending"
+        name="Pending"
+        parent="menu_am_maintenance"
+        action="maintenance_action_pending"
+        sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- AUDIT                                                         -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_audit"
+        name="Audit"
+        parent="menu_am_root"
+        sequence="70"
+        groups="asset_management.group_asset_manager"/>
+
+    <menuitem id="menu_am_audit_cycles"
+        name="Audit Cycles"
+        parent="menu_am_audit"
+        action="audit_cycle_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_audit_lines"
+        name="Audit Lines"
+        parent="menu_am_audit"
+        action="audit_line_action"
+        sequence="20"/>
+
+    <!-- ============================================================ -->
+    <!-- REPORTS & ANALYTICS                                           -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_reports"
+        name="Reports"
+        parent="menu_am_root"
+        sequence="80"/>
+
+    <menuitem id="menu_am_reports_assets"
+        name="Asset Report"
+        parent="menu_am_reports"
+        action="asset_report_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_reports_allocations"
+        name="Allocation Report"
+        parent="menu_am_reports"
+        action="allocation_report_action"
+        sequence="20"/>
+
+    <menuitem id="menu_am_reports_maintenance"
+        name="Maintenance Report"
+        parent="menu_am_reports"
+        action="maintenance_report_action"
+        sequence="30"/>
+
+    <menuitem id="menu_am_reports_bookings"
+        name="Booking Report"
+        parent="menu_am_reports"
+        action="booking_report_action"
+        sequence="40"/>
+
+    <!-- ============================================================ -->
+    <!-- ORGANIZATION SETUP (Admin only)                               -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_setup"
+        name="Organization Setup"
+        parent="menu_am_root"
+        sequence="90"
+        groups="asset_management.group_admin"/>
+
+    <menuitem id="menu_am_setup_departments"
+        name="Departments"
+        parent="menu_am_setup"
+        action="am_department_action"
+        sequence="10"/>
+
+    <menuitem id="menu_am_setup_categories"
+        name="Asset Categories"
+        parent="menu_am_setup"
+        action="am_category_action"
+        sequence="20"/>
+
+    <menuitem id="menu_am_setup_employees"
+        name="Employee Directory"
+        parent="menu_am_setup"
+        action="am_employee_action"
+        sequence="30"/>
+
+    <!-- ============================================================ -->
+    <!-- ACTIVITY LOG (Admin)                                          -->
+    <!-- ============================================================ -->
+
+    <menuitem id="menu_am_logs"
+        name="Activity Log"
+        parent="menu_am_root"
+        action="mail_message_asset_log_action"
+        sequence="100"
+        groups="asset_management.group_admin"/>
+
+</odoo>

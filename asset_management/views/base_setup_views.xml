@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- DEPARTMENT VIEWS                                              -->
+    <!-- ============================================================ -->
+
+    <record id="am_department_form" model="ir.ui.view">
+        <field name="name">am.department.form</field>
+        <field name="model">am.department</field>
+        <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Department Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="parent_id" options="{'no_create': True}"/>
+                            <field name="head_user_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="complete_name"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Members" name="members">
+                            <field name="member_ids"/>
+                        </page>
+                        <page string="Child Departments" name="children">
+                            <field name="child_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="am_department_list" model="ir.ui.view">
+        <field name="name">am.department.list</field>
+        <field name="model">am.department</field>
+        <field name="arch" type="xml">
+            <list string="Departments">
+                <field name="name"/>
+                <field name="complete_name"/>
+                <field name="head_user_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="am_department_action" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">am.department</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ASSET CATEGORY VIEWS                                          -->
+    <!-- ============================================================ -->
+
+    <record id="am_category_form" model="ir.ui.view">
+        <field name="name">am.category.form</field>
+        <field name="model">am.category</field>
+        <field name="arch" type="xml">
+            <form string="Asset Category">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Category Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="warranty_period_months"/>
+                            <field name="default_condition"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="am_category_list" model="ir.ui.view">
+        <field name="name">am.category.list</field>
+        <field name="model">am.category</field>
+        <field name="arch" type="xml">
+            <list string="Asset Categories">
+                <field name="name"/>
+                <field name="warranty_period_months"/>
+                <field name="default_condition"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="am_category_action" model="ir.actions.act_window">
+        <field name="name">Asset Categories</field>
+        <field name="res_model">am.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- EMPLOYEE DIRECTORY VIEWS                                      -->
+    <!-- ============================================================ -->
+
+    <record id="am_employee_form" model="ir.ui.view">
+        <field name="name">am.employee.form</field>
+        <field name="model">am.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <header>
+                    <button name="action_promote_dept_head" string="Promote to Dept Head"
+                        type="object" class="btn-primary"
+                        invisible="role != 'employee'"
+                        groups="asset_management.group_admin"/>
+                    <button name="action_promote_asset_manager" string="Promote to Asset Manager"
+                        type="object" class="btn-primary"
+                        invisible="role != 'employee'"
+                        groups="asset_management.group_admin"/>
+                    <button name="action_promote_admin" string="Promote to Admin"
+                        type="object" class="btn-primary"
+                        invisible="role != 'employee'"
+                        groups="asset_management.group_admin"/>
+                    <button name="action_revoke_role" string="Revoke Role"
+                        type="object" class="btn-warning"
+                        invisible="role == 'employee'"
+                        groups="asset_management.group_admin"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <field name="image_128" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Employee Name"/></h1>
+                        <field name="role" widget="badge"
+                            decoration-success="role == 'admin'"
+                            decoration-warning="role == 'asset_manager'"
+                            decoration-info="role == 'dept_head'"
+                            decoration-muted="role == 'employee'"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" options="{'no_create': True}"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="department_id" options="{'no_create': True}"/>
+                            <field name="job_title"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="am_employee_list" model="ir.ui.view">
+        <field name="name">am.employee.list</field>
+        <field name="model">am.employee</field>
+        <field name="arch" type="xml">
+            <list string="Employee Directory">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="department_id"/>
+                <field name="job_title"/>
+                <field name="role" widget="badge"
+                    decoration-success="role == 'admin'"
+                    decoration-warning="role == 'asset_manager'"
+                    decoration-info="role == 'dept_head'"
+                    decoration-muted="role == 'employee'"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="am_employee_kanban" model="ir.ui.view">
+        <field name="name">am.employee.kanban</field>
+        <field name="model">am.employee</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="department_id"/>
+                <field name="role"/>
+                <field name="job_title"/>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="card">
+                        <field name="image_128" widget="image" alt="Avatar"/>
+                        <div class="o_kanban_record_top mb8">
+                            <div class="o_kanban_record_headings">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                            </div>
+                        </div>
+                        <div t-if="record.department_id.raw_value" class="text-muted small">
+                            <field name="department_id"/>
+                        </div>
+                        <div t-if="record.job_title.raw_value" class="text-muted small">
+                            <field name="job_title"/>
+                        </div>
+                        <div class="mt4">
+                            <field name="role" widget="badge"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="am_employee_search" model="ir.ui.view">
+        <field name="name">am.employee.search</field>
+        <field name="model">am.employee</field>
+        <field name="arch" type="xml">
+            <search string="Search Employees">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="department_id"/>
+                <field name="role"/>
+                <filter name="filter_employee" string="Employees" domain="[('role', '=', 'employee')]"/>
+                <filter name="filter_dept_head" string="Dept Heads" domain="[('role', '=', 'dept_head')]"/>
+                <filter name="filter_asset_manager" string="Asset Managers" domain="[('role', '=', 'asset_manager')]"/>
+                <group name="group_by">
+                    <filter name="group_department" string="Department" context="{'group_by': 'department_id'}"/>
+                    <filter name="group_role" string="Role" context="{'group_by': 'role'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="am_employee_action" model="ir.actions.act_window">
+        <field name="name">Employee Directory</field>
+        <field name="res_model">am.employee</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="am_employee_search"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- EXTEND RES.USERS FORM TO SHOW AM ROLE                        -->
+    <!-- ============================================================ -->
+
+    <record id="view_users_form_am_role" model="ir.ui.view">
+        <field name="name">res.users.form.am.role</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Asset Management" name="asset_management">
+                    <group>
+                        <group>
+                            <field name="am_role" readonly="1" widget="badge"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

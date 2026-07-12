@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================================================ -->
+    <!-- Record Rules — Additive: employee own → dept head dept → mgr  -->
+    <!-- ============================================================ -->
+
+    <!-- ALLOCATIONS -->
+    <record id="rr_allocation_employee" model="ir.rule">
+        <field name="name">Allocation: Employee sees own</field>
+        <field name="model_id" ref="model_asset_allocation"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_employee'))]"/>
+    </record>
+    <record id="rr_allocation_dept_head" model="ir.rule">
+        <field name="name">Allocation: Dept Head sees department</field>
+        <field name="model_id" ref="model_asset_allocation"/>
+        <field name="domain_force">[('employee_id.department_id.head_user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_dept_head'))]"/>
+    </record>
+    <record id="rr_allocation_manager" model="ir.rule">
+        <field name="name">Allocation: Manager sees all</field>
+        <field name="model_id" ref="model_asset_allocation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_asset_manager'))]"/>
+    </record>
+
+    <!-- TRANSFERS -->
+    <record id="rr_transfer_employee" model="ir.rule">
+        <field name="name">Transfer: Employee sees own</field>
+        <field name="model_id" ref="model_asset_transfer"/>
+        <field name="domain_force">[('requested_by', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_employee'))]"/>
+    </record>
+    <record id="rr_transfer_dept_head" model="ir.rule">
+        <field name="name">Transfer: Dept Head sees department</field>
+        <field name="model_id" ref="model_asset_transfer"/>
+        <field name="domain_force">[('current_holder_id.department_id.head_user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_dept_head'))]"/>
+    </record>
+    <record id="rr_transfer_manager" model="ir.rule">
+        <field name="name">Transfer: Manager sees all</field>
+        <field name="model_id" ref="model_asset_transfer"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_asset_manager'))]"/>
+    </record>
+
+    <!-- BOOKINGS -->
+    <record id="rr_booking_employee" model="ir.rule">
+        <field name="name">Booking: Employee sees own</field>
+        <field name="model_id" ref="model_resource_booking"/>
+        <field name="domain_force">[('booked_by', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_employee'))]"/>
+    </record>
+    <!-- Assumption: dept heads see all bookings (booked_by is res.users, not am.employee,
+         so we can't easily traverse to department. Acceptable simplification. -->
+    <record id="rr_booking_dept_head" model="ir.rule">
+        <field name="name">Booking: Dept Head sees all</field>
+        <field name="model_id" ref="model_resource_booking"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_dept_head'))]"/>
+    </record>
+
+    <!-- MAINTENANCE -->
+    <record id="rr_maintenance_employee" model="ir.rule">
+        <field name="name">Maintenance: Employee sees own</field>
+        <field name="model_id" ref="model_am_maintenance_request"/>
+        <field name="domain_force">[('requested_by', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_employee'))]"/>
+    </record>
+    <record id="rr_maintenance_dept_head" model="ir.rule">
+        <field name="name">Maintenance: Dept Head sees department</field>
+        <field name="model_id" ref="model_am_maintenance_request"/>
+        <field name="domain_force">[('employee_id.department_id.head_user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_dept_head'))]"/>
+    </record>
+    <record id="rr_maintenance_manager" model="ir.rule">
+        <field name="name">Maintenance: Manager sees all</field>
+        <field name="model_id" ref="model_am_maintenance_request"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_asset_manager'))]"/>
+    </record>
+
+    <!-- AUDIT: only asset managers and admins (no employee-level access) -->
+    <record id="rr_audit_cycle_manager" model="ir.rule">
+        <field name="name">Audit Cycle: Manager/Admin sees all</field>
+        <field name="model_id" ref="model_asset_audit_cycle"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_asset_manager'))]"/>
+    </record>
+    <record id="rr_audit_line_manager" model="ir.rule">
+        <field name="name">Audit Line: Manager/Admin sees all</field>
+        <field name="model_id" ref="model_asset_audit_line"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_asset_manager'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- BOOKING FORM VIEW                                             -->
+    <!-- ============================================================ -->
+
+    <record id="booking_form" model="ir.ui.view">
+        <field name="name">resource.booking.form</field>
+        <field name="model">resource.booking</field>
+        <field name="arch" type="xml">
+            <form string="Resource Booking">
+                <header>
+                    <button name="action_cancel" string="Cancel Booking"
+                        type="object" class="btn-danger"
+                        invisible="state != 'upcoming'"
+                        groups="asset_management.group_employee"/>
+                    <button name="action_reschedule" string="Reschedule"
+                        type="object" class="btn-secondary"
+                        invisible="state != 'upcoming'"
+                        groups="asset_management.group_employee"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id" options="{'no_create': True}"/>
+                            <field name="asset_tag" readonly="1"/>
+                            <field name="booked_by" readonly="1"/>
+                            <field name="purpose"/>
+                        </group>
+                        <group>
+                            <field name="start_datetime"/>
+                            <field name="stop_datetime"/>
+                        </group>
+                    </group>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="upcoming,ongoing,completed" readonly="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BOOKING LIST VIEW                                             -->
+    <!-- ============================================================ -->
+
+    <record id="booking_list" model="ir.ui.view">
+        <field name="name">resource.booking.list</field>
+        <field name="model">resource.booking</field>
+        <field name="arch" type="xml">
+            <list string="Resource Bookings">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="booked_by"/>
+                <field name="start_datetime"/>
+                <field name="stop_datetime"/>
+                <field name="purpose"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'upcoming'"
+                    decoration-warning="state == 'ongoing'"
+                    decoration-success="state == 'completed'"
+                    decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BOOKING CALENDAR VIEW                                         -->
+    <!-- ============================================================ -->
+
+    <record id="booking_calendar" model="ir.ui.view">
+        <field name="name">resource.booking.calendar</field>
+        <field name="model">resource.booking</field>
+        <field name="arch" type="xml">
+            <calendar string="Resource Bookings"
+                date_start="start_datetime"
+                date_stop="stop_datetime"
+                color="booked_by">
+                <field name="asset_id"/>
+                <field name="booked_by"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BOOKING SEARCH VIEW                                           -->
+    <!-- ============================================================ -->
+
+    <record id="booking_search" model="ir.ui.view">
+        <field name="name">resource.booking.search</field>
+        <field name="model">resource.booking</field>
+        <field name="arch" type="xml">
+            <search string="Search Bookings">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="booked_by"/>
+                <separator/>
+                <filter name="filter_upcoming" string="Upcoming" domain="[('state', '=', 'upcoming')]"/>
+                <filter name="filter_ongoing" string="Ongoing" domain="[('state', '=', 'ongoing')]"/>
+                <filter name="filter_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+                <separator/>
+                <group name="group_by">
+                    <filter name="group_resource" string="Resource" context="{'group_by': 'asset_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- BOOKING ACTION                                                -->
+    <!-- ============================================================ -->
+
+    <record id="booking_action" model="ir.actions.act_window">
+        <field name="name">Resource Bookings</field>
+        <field name="res_model">resource.booking</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="search_view_id" ref="booking_search"/>
+    </record>
+
+    <record id="booking_action_upcoming" model="ir.actions.act_window">
+        <field name="name">Upcoming Bookings</field>
+        <field name="res_model">resource.booking</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="search_view_id" ref="booking_search"/>
+        <field name="domain">[('state', '=', 'upcoming')]</field>
+    </record>
+
+</odoo>

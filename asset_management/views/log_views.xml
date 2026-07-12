@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- ADMIN AUDIT LOG (mail.message filtered to this module)        -->
+    <!-- ============================================================ -->
+
+    <record id="mail_message_asset_log_view_form" model="ir.ui.view">
+        <field name="name">mail.message.asset.log.form</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <form string="Message" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="author_id"/>
+                            <field name="model"/>
+                            <field name="res_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="subject"/>
+                            <field name="subtype_id"/>
+                            <field name="message_type"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="body" widget="html" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_asset_log_view_list" model="ir.ui.view">
+        <field name="name">mail.message.asset.log.list</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <list string="Activity Log" create="false" edit="false" delete="false">
+                <field name="date"/>
+                <field name="author_id"/>
+                <field name="model"/>
+                <field name="res_id"/>
+                <field name="subject"/>
+                <field name="body" widget="html"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="mail_message_asset_log_view_search" model="ir.ui.view">
+        <field name="name">mail.message.asset.log.search</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <search string="Search Activity Log">
+                <field name="author_id"/>
+                <field name="subject"/>
+                <field name="body"/>
+                <filter name="filter_assets" string="Asset Messages"
+                    domain="[('model', '=', 'asset.asset')]"/>
+                <filter name="filter_allocations" string="Allocation Messages"
+                    domain="[('model', '=', 'asset.allocation')]"/>
+                <filter name="filter_transfers" string="Transfer Messages"
+                    domain="[('model', '=', 'asset.transfer')]"/>
+                <filter name="filter_bookings" string="Booking Messages"
+                    domain="[('model', '=', 'resource.booking')]"/>
+                <filter name="filter_maintenance" string="Maintenance Messages"
+                    domain="[('model', '=', 'am.maintenance.request')]"/>
+                <filter name="filter_audit" string="Audit Messages"
+                    domain="[('model', '=', 'asset.audit.cycle')]"/>
+                <separator/>
+                <group name="group_by">
+                    <filter name="group_model" string="Model" context="{'group_by': 'model'}"/>
+                    <filter name="group_author" string="Author" context="{'group_by': 'author_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mail_message_asset_log_action" model="ir.actions.act_window">
+        <field name="name">Activity Log</field>
+        <field name="res_model">mail.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="mail_message_asset_log_view_search"/>
+        <field name="domain">[('model', 'in', ['asset.asset', 'asset.allocation', 'asset.transfer', 'resource.booking', 'am.maintenance.request', 'asset.audit.cycle', 'asset.audit.line'])]</field>
+        <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+    </record>
+
+</odoo>
