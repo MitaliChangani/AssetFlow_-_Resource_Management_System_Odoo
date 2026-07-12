@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- ALLOCATION FORM VIEW                                          -->
+    <!-- ============================================================ -->
+
+    <record id="allocation_form" model="ir.ui.view">
+        <field name="name">asset.allocation.form</field>
+        <field name="model">asset.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Asset Allocation">
+                <header>
+                    <button name="action_return" string="Mark Returned"
+                        type="object" class="btn-primary"
+                        invisible="state != 'allocated'"
+                        groups="asset_management.group_employee"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id" options="{'no_create': True}"/>
+                            <field name="asset_tag" readonly="1"/>
+                            <field name="employee_id" options="{'no_create': True}"/>
+                            <field name="department_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="allocated_date"/>
+                            <field name="expected_return_date"/>
+                            <field name="actual_return_date"
+                                invisible="state != 'returned'"/>
+                            <field name="return_condition"
+                                invisible="state != 'returned'"
+                                widget="badge"/>
+                            <field name="return_condition_notes"
+                                invisible="state != 'returned'"/>
+                            <field name="is_overdue"/>
+                        </group>
+                    </group>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="allocated,returned" readonly="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ALLOCATION LIST VIEW                                          -->
+    <!-- ============================================================ -->
+
+    <record id="allocation_list" model="ir.ui.view">
+        <field name="name">asset.allocation.list</field>
+        <field name="model">asset.allocation</field>
+        <field name="arch" type="xml">
+            <list string="Allocations">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="allocated_date"/>
+                <field name="expected_return_date"/>
+                <field name="actual_return_date"/>
+                <field name="is_overdue" widget="boolean_toggle"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'allocated'"
+                    decoration-muted="state == 'returned'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ALLOCATION SEARCH VIEW                                        -->
+    <!-- ============================================================ -->
+
+    <record id="allocation_search" model="ir.ui.view">
+        <field name="name">asset.allocation.search</field>
+        <field name="model">asset.allocation</field>
+        <field name="arch" type="xml">
+            <search string="Search Allocations">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="employee_id"/>
+                <separator/>
+                <filter name="filter_active" string="Active" domain="[('state', '=', 'allocated')]"/>
+                <filter name="filter_returned" string="Returned" domain="[('state', '=', 'returned')]"/>
+                <filter name="filter_overdue" string="Overdue" domain="[('is_overdue', '=', True)]"/>
+                <separator/>
+                <group name="group_by">
+                    <filter name="group_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_department" string="Department" context="{'group_by': 'department_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ALLOCATION ACTION                                             -->
+    <!-- ============================================================ -->
+
+    <record id="allocation_action" model="ir.actions.act_window">
+        <field name="name">Allocations</field>
+        <field name="res_model">asset.allocation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="allocation_search"/>
+    </record>
+
+    <record id="allocation_action_active" model="ir.actions.act_window">
+        <field name="name">Active Allocations</field>
+        <field name="res_model">asset.allocation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="allocation_search"/>
+        <field name="domain">[('state', '=', 'allocated')]</field>
+    </record>
+
+    <record id="allocation_action_overdue" model="ir.actions.act_window">
+        <field name="name">Overdue Allocations</field>
+        <field name="res_model">asset.allocation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="allocation_search"/>
+        <field name="domain">[('is_overdue', '=', True)]</field>
+    </record>
+
+</odoo>
