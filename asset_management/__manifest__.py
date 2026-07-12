@@ -13,6 +13,7 @@
     'depends': ['base', 'mail'],
     'data': [
         'views/allocation_views.xml',
+        'views/asset_views.xml',
     ],
     'installable': True,
     'application': True,

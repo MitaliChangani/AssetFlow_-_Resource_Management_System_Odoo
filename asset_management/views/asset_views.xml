@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- ASSET FORM VIEW                                               -->
+    <!-- ============================================================ -->
+
+    <record id="asset_form" model="ir.ui.view">
+        <field name="name">asset.asset.form</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="available,allocated,maintenance,retired"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_allocate" string="Allocate"
+                            type="object" class="btn-primary"
+                            invisible="state != 'available'"
+                            groups="asset_management.group_employee"/>
+                        <button name="action_request_maintenance" string="Request Maintenance"
+                            type="object" class="btn-secondary"
+                            invisible="state in ('maintenance', 'lost', 'retired', 'disposed')"
+                            groups="asset_management.group_employee"/>
+                        <button name="action_retire" string="Retire"
+                            type="object" class="btn-warning"
+                            invisible="state not in ('available', 'allocated')"
+                            groups="asset_management.group_asset_manager"/>
+                        <button name="action_mark_lost" string="Mark Lost"
+                            type="object" class="btn-danger"
+                            invisible="state in ('lost', 'retired', 'disposed')"
+                            groups="asset_management.group_asset_manager"/>
+                        <button name="action_dispose" string="Dispose"
+                            type="object" class="btn-danger"
+                            invisible="state in ('retired', 'disposed')"
+                            groups="asset_management.group_admin"/>
+                        <button name="action_make_available" string="Make Available"
+                            type="object" class="btn-success"
+                            invisible="state not in ('retired', 'lost')"
+                            groups="asset_management.group_asset_manager"/>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Asset Name"/>
+                        </h1>
+                        <div class="oe_edit_only">
+                            <field name="asset_tag" widget="barcode"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id" options="{'no_create': True}"/>
+                            <field name="serial_number"/>
+                            <field name="acquisition_date"/>
+                            <field name="acquisition_cost"/>
+                        </group>
+                        <group>
+                            <field name="condition"/>
+                            <field name="location"/>
+                            <field name="department_id" options="{'no_create': True}"/>
+                            <field name="is_bookable"/>
+                            <field name="qr_code" widget="barcode"/>
+                        </group>
+                    </group>
+                    <group string="Current Status" invisible="state in ('available', 'disposed')">
+                        <group>
+                            <field name="current_holder_id" readonly="1"/>
+                            <field name="active_allocation_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allocation History" name="allocations">
+                            <field name="allocation_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                    <field name="allocated_date"/>
+                                    <field name="expected_return_date"/>
+                                    <field name="actual_return_date"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Maintenance History" name="maintenance">
+                            <field name="maintenance_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="priority" widget="badge"/>
+                                    <field name="requested_by"/>
+                                    <field name="technician_id"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Transfer History" name="transfers">
+                            <field name="transfer_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="requested_by"/>
+                                    <field name="current_holder_id"/>
+                                    <field name="requested_to"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ASSET LIST VIEW                                               -->
+    <!-- ============================================================ -->
+
+    <record id="asset_list" model="ir.ui.view">
+        <field name="name">asset.asset.list</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <list string="Assets">
+                <field name="asset_tag" widget="barcode" width="120"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="serial_number"/>
+                <field name="department_id"/>
+                <field name="location"/>
+                <field name="condition" widget="badge"
+                    decoration-success="condition == 'new'"
+                    decoration-info="condition == 'good'"
+                    decoration-warning="condition == 'fair'"
+                    decoration-danger="condition == 'poor'"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'available'"
+                    decoration-info="state == 'allocated'"
+                    decoration-warning="state == 'reserved'"
+                    decoration-danger="state in ('maintenance', 'lost')"/>
+                <field name="current_holder_id" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ASSET KANBAN VIEW                                             -->
+    <!-- ============================================================ -->
+
+    <record id="asset_kanban" model="ir.ui.view">
+        <field name="name">asset.asset.kanban</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="asset_tag"/>
+                <field name="state"/>
+                <field name="category_id"/>
+                <field name="department_id"/>
+                <field name="condition"/>
+                <field name="current_holder_id"/>
+                <field name="image_1920"/>
+                <templates>
+                    <t t-name="card" class="o_kanban_record_has_image_field">
+                        <field name="image_1920" widget="image" alt="Asset"/>
+                        <div class="o_kanban_record_top mb8">
+                            <div class="o_kanban_record_headings">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+                            <field name="state" widget="badge"/>
+                        </div>
+                        <div class="o_kanban_record_body">
+                            <div t-if="record.asset_tag.raw_value" class="text-muted small">
+                                <i class="fa fa-barcode" title="Asset Tag"/> <field name="asset_tag"/>
+                            </div>
+                            <div t-if="record.category_id.raw_value" class="text-muted small">
+                                <field name="category_id"/>
+                            </div>
+                            <div t-if="record.department_id.raw_value" class="text-muted small">
+                                <field name="department_id"/>
+                            </div>
+                            <div t-if="record.current_holder_id.raw_value" class="small">
+                                <i class="fa fa-user" title="Holder"/> <field name="current_holder_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ASSET SEARCH VIEW                                             -->
+    <!-- ============================================================ -->
+
+    <record id="asset_search" model="ir.ui.view">
+        <field name="name">asset.asset.search</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <search string="Search Assets">
+                <field name="name"/>
+                <field name="asset_tag"/>
+                <field name="serial_number"/>
+                <field name="qr_code"/>
+                <field name="category_id"/>
+                <field name="department_id"/>
+                <field name="location"/>
+                <field name="current_holder_id"/>
+                <separator/>
+                <filter name="filter_available" string="Available" domain="[('state', '=', 'available')]"/>
+                <filter name="filter_allocated" string="Allocated" domain="[('state', '=', 'allocated')]"/>
+                <filter name="filter_reserved" string="Reserved" domain="[('state', '=', 'reserved')]"/>
+                <filter name="filter_maintenance" string="In Maintenance" domain="[('state', '=', 'maintenance')]"/>
+                <filter name="filter_lost" string="Lost" domain="[('state', '=', 'lost')]"/>
+                <separator/>
+                <filter name="filter_bookable" string="Bookable" domain="[('is_bookable', '=', True)]"/>
+                <separator/>
+                <group name="group_by">
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_department" string="Department" context="{'group_by': 'department_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_condition" string="Condition" context="{'group_by': 'condition'}"/>
+                    <filter name="group_location" string="Location" context="{'group_by': 'location'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- ASSET ACTION                                                  -->
+    <!-- ============================================================ -->
+
+    <record id="asset_action" model="ir.actions.act_window">
+        <field name="name">Assets</field>
+        <field name="res_model">asset.asset</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="asset_search"/>
+    </record>
+
+    <record id="asset_action_available" model="ir.actions.act_window">
+        <field name="name">Available Assets</field>
+        <field name="res_model">asset.asset</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="asset_search"/>
+        <field name="domain">[('state', '=', 'available')]</field>
+    </record>
+
+</odoo>
