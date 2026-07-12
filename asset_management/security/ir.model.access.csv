@@ -32,8 +32,12 @@ access_maintenance_request_user,am.maintenance.request.user,model_am_maintenance
 access_maintenance_request_employee,am.maintenance.request.employee,model_am_maintenance_request,group_employee,1,0,1,0
 access_maintenance_request_manager,am.maintenance.request.asset_manager,model_am_maintenance_request,group_asset_manager,1,1,1,1
 access_maintenance_request_admin,am.maintenance.request.admin,model_am_maintenance_request,group_admin,1,1,1,1
+access_asset_audit_cycle_user,asset.audit.cycle.user,model_asset_audit_cycle,base.group_user,1,0,0,0
+access_asset_audit_cycle_employee,asset.audit.cycle.employee,model_asset_audit_cycle,group_employee,1,0,0,0
 access_asset_audit_cycle_manager,asset.audit.cycle.asset_manager,model_asset_audit_cycle,group_asset_manager,1,1,1,1
 access_asset_audit_cycle_admin,asset.audit.cycle.admin,model_asset_audit_cycle,group_admin,1,1,1,1
+access_asset_audit_line_user,asset.audit.line.user,model_asset_audit_line,base.group_user,1,0,0,0
+access_asset_audit_line_employee,asset.audit.line.employee,model_asset_audit_line,group_employee,1,0,0,0
 access_asset_audit_line_manager,asset.audit.line.asset_manager,model_asset_audit_line,group_asset_manager,1,1,1,1
 access_asset_audit_line_admin,asset.audit.line.admin,model_asset_audit_line,group_admin,1,1,1,1
 access_wiz_return_condition_employee,wiz.return.condition.employee,model_wiz_return_condition,group_employee,1,1,1,0

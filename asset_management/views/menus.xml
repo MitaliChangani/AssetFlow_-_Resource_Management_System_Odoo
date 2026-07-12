@@ -140,8 +140,7 @@
     <menuitem id="menu_am_audit"
         name="Audit"
         parent="menu_am_root"
-        sequence="70"
-        groups="asset_management.group_asset_manager"/>
+        sequence="70"/>
 
     <menuitem id="menu_am_audit_cycles"
         name="Audit Cycles"
@@ -195,8 +194,7 @@
     <menuitem id="menu_am_setup"
         name="Organization Setup"
         parent="menu_am_root"
-        sequence="90"
-        groups="asset_management.group_admin"/>
+        sequence="90"/>
 
     <menuitem id="menu_am_setup_departments"
         name="Departments"
@@ -224,7 +222,6 @@
         name="Activity Log"
         parent="menu_am_root"
         action="mail_message_asset_log_action"
-        sequence="100"
-        groups="asset_management.group_admin"/>
+        sequence="100"/>
 
 </odoo>
