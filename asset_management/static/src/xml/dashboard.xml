@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="asset_management.Dashboard">
+        <div class="o_asset_management_dashboard container-fluid py-3">
+            <h2 class="mb-4">Asset Management Dashboard</h2>
+
+            <!-- Loading state -->
+            <div t-if="state.loading" class="text-center py-5">
+                <i class="fa fa-spinner fa-spin fa-3x"/>
+                <p class="mt-2">Loading dashboard...</p>
+            </div>
+
+            <div t-else="">
+                <!-- KPI Cards Row 1 -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-success h-100 shadow-sm o_clickable" t-on-click="openAvailableAssets">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Available Assets</h6>
+                                <h2 class="text-success mb-0">
+                                    <t t-esc="state.kpis.available_count"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-info h-100 shadow-sm o_clickable" t-on-click="openAllocatedAssets">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Allocated Assets</h6>
+                                <h2 class="text-info mb-0">
+                                    <t t-esc="state.kpis.allocated_count"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-warning h-100 shadow-sm o_clickable" t-on-click="openMaintenance">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">In Maintenance</h6>
+                                <h2 class="text-warning mb-0">
+                                    <t t-esc="state.kpis.maintenance_today"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-primary h-100 shadow-sm o_clickable" t-on-click="openActiveBookings">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Active Bookings</h6>
+                                <h2 class="text-primary mb-0">
+                                    <t t-esc="state.kpis.active_bookings"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI Cards Row 2 -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-secondary h-100 shadow-sm o_clickable" t-on-click="openPendingTransfers">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Pending Transfers</h6>
+                                <h2 class="text-secondary mb-0">
+                                    <t t-esc="state.kpis.pending_transfers"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-info h-100 shadow-sm o_clickable" t-on-click="openUpcomingReturns">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">Upcoming Returns</h6>
+                                <h2 class="text-info mb-0">
+                                    <t t-esc="state.kpis.upcoming_returns"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-danger h-100 shadow-sm o_clickable" t-on-click="openOverdueReturns"
+                            t-attf-class="{{ state.kpis.overdue_returns > 0 ? 'border-danger bg-danger bg-opacity-10' : '' }}">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted mb-1">
+                                    Overdue Returns
+                                    <span t-if="state.kpis.overdue_returns > 0"
+                                        class="badge bg-danger rounded-pill ms-1">
+                                        <i class="fa fa-exclamation-triangle"/> URGENT
+                                    </span>
+                                </h6>
+                                <h2 t-attf-class="{{ state.kpis.overdue_returns > 0 ? 'text-danger' : 'text-secondary' }} mb-0">
+                                    <t t-esc="state.kpis.overdue_returns"/>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5 class="mb-0">Quick Actions</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button class="btn btn-primary" t-on-click="openQuickRegister">
+                                        <i class="fa fa-plus me-1"/> Register Asset
+                                    </button>
+                                    <button class="btn btn-info" t-on-click="openQuickBook">
+                                        <i class="fa fa-calendar me-1"/> Book Resource
+                                    </button>
+                                    <button class="btn btn-warning" t-on-click="openQuickMaintenance">
+                                        <i class="fa fa-wrench me-1"/> Raise Maintenance Request
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

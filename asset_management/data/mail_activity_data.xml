@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_activity_data_overdue_return" model="mail.activity.type">
+            <field name="name">Overdue Return Alert</field>
+            <field name="icon">fa-exclamation-triangle</field>
+            <field name="summary">Asset return is overdue</field>
+        </record>
+
+        <record id="mail_activity_data_booking_reminder" model="mail.activity.type">
+            <field name="name">Booking Reminder</field>
+            <field name="icon">fa-clock-o</field>
+            <field name="summary">Upcoming resource booking</field>
+        </record>
+
+        <record id="mail_activity_data_maintenance" model="mail.activity.type">
+            <field name="name">Maintenance Follow-up</field>
+            <field name="icon">fa-wrench</field>
+            <field name="summary">Maintenance action required</field>
+        </record>
+    </data>
+</odoo>

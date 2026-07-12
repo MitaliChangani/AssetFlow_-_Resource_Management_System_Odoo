@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Asset Tag Sequence: AF-00001 -->
+        <record id="seq_asset_tag" model="ir.sequence">
+            <field name="name">Asset Tag</field>
+            <field name="code">asset.asset</field>
+            <field name="prefix">AF-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Allocation Sequence -->
+        <record id="seq_allocation" model="ir.sequence">
+            <field name="name">Asset Allocation</field>
+            <field name="code">asset.allocation</field>
+            <field name="prefix">AL-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Transfer Sequence -->
+        <record id="seq_transfer" model="ir.sequence">
+            <field name="name">Asset Transfer</field>
+            <field name="code">asset.transfer</field>
+            <field name="prefix">TR-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Booking Sequence -->
+        <record id="seq_booking" model="ir.sequence">
+            <field name="name">Resource Booking</field>
+            <field name="code">resource.booking</field>
+            <field name="prefix">BK-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Maintenance Sequence -->
+        <record id="seq_maintenance" model="ir.sequence">
+            <field name="name">Maintenance Request</field>
+            <field name="code">am.maintenance.request</field>
+            <field name="prefix">MR-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+
+        <!-- Audit Cycle Sequence -->
+        <record id="seq_audit_cycle" model="ir.sequence">
+            <field name="name">Audit Cycle</field>
+            <field name="code">asset.audit.cycle</field>
+            <field name="prefix">AUD-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+    </data>
+</odoo>

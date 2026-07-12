@@ -1,0 +1,17 @@
+.o_asset_management_dashboard .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+.o_asset_management_dashboard .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+.o_asset_management_dashboard .card-body h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.o_asset_management_dashboard .card-body h6 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
