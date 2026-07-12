@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- TRANSFER FORM VIEW                                            -->
+    <!-- ============================================================ -->
+
+    <record id="transfer_form" model="ir.ui.view">
+        <field name="name">asset.transfer.form</field>
+        <field name="model">asset.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Asset Transfer">
+                <header>
+                    <button name="action_approve" string="Approve Transfer"
+                        type="object" class="btn-primary"
+                        invisible="state != 'requested'"
+                        groups="asset_management.group_asset_manager"/>
+                    <button name="action_reject" string="Reject Transfer"
+                        type="object" class="btn-danger"
+                        invisible="state != 'requested'"
+                        groups="asset_management.group_asset_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id" options="{'no_create': True}"/>
+                            <field name="asset_tag" readonly="1"/>
+                            <field name="current_holder_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="requested_by" readonly="1"/>
+                            <field name="requested_to" options="{'no_create': True}"/>
+                            <field name="reason"/>
+                        </group>
+                    </group>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="requested,approved,completed" readonly="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TRANSFER LIST VIEW                                            -->
+    <!-- ============================================================ -->
+
+    <record id="transfer_list" model="ir.ui.view">
+        <field name="name">asset.transfer.list</field>
+        <field name="model">asset.transfer</field>
+        <field name="arch" type="xml">
+            <list string="Transfers">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="current_holder_id"/>
+                <field name="requested_by"/>
+                <field name="requested_to"/>
+                <field name="state" widget="badge"
+                    decoration-warning="state == 'requested'"
+                    decoration-success="state in ('approved', 'completed')"
+                    decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TRANSFER SEARCH VIEW                                          -->
+    <!-- ============================================================ -->
+
+    <record id="transfer_search" model="ir.ui.view">
+        <field name="name">asset.transfer.search</field>
+        <field name="model">asset.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Search Transfers">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="requested_by"/>
+                <field name="requested_to"/>
+                <separator/>
+                <filter name="filter_requested" string="Requested" domain="[('state', '=', 'requested')]"/>
+                <filter name="filter_approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_rejected" string="Rejected" domain="[('state', '=', 'rejected')]"/>
+                <filter name="filter_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
+                <group name="group_by">
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TRANSFER ACTION                                               -->
+    <!-- ============================================================ -->
+
+    <record id="transfer_action" model="ir.actions.act_window">
+        <field name="name">Transfers</field>
+        <field name="res_model">asset.transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transfer_search"/>
+    </record>
+
+    <record id="transfer_action_pending" model="ir.actions.act_window">
+        <field name="name">Pending Transfers</field>
+        <field name="res_model">asset.transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="transfer_search"/>
+        <field name="domain">[('state', '=', 'requested')]</field>
+    </record>
+
+</odoo>

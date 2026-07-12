@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wiz_return_condition_form" model="ir.ui.view">
+        <field name="name">wiz.return.condition.form</field>
+        <field name="model">wiz.return.condition</field>
+        <field name="arch" type="xml">
+            <form string="Return Asset">
+                <group>
+                    <group>
+                        <field name="allocation_id" invisible="1"/>
+                        <field name="condition" widget="selection" required="1"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="notes" placeholder="Describe the condition of the returned asset..."/>
+                </group>
+                <footer>
+                    <button string="Confirm Return" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wiz_return_condition" model="ir.actions.act_window">
+        <field name="name">Return Asset</field>
+        <field name="res_model">wiz.return.condition</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

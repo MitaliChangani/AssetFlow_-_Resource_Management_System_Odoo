@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- MAINTENANCE FORM VIEW                                         -->
+    <!-- ============================================================ -->
+
+    <record id="maintenance_form" model="ir.ui.view">
+        <field name="name">am.maintenance.request.form</field>
+        <field name="model">am.maintenance.request</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Request">
+                <header>
+                    <button name="action_approve" string="Approve"
+                        type="object" class="btn-primary"
+                        invisible="state != 'pending'"
+                        groups="asset_management.group_asset_manager"/>
+                    <button name="action_reject" string="Reject"
+                        type="object" class="btn-danger"
+                        invisible="state != 'pending'"
+                        groups="asset_management.group_asset_manager"/>
+                    <button name="action_start_work" string="Start Work"
+                        type="object" class="btn-primary"
+                        invisible="state != 'assigned'"
+                        groups="asset_management.group_asset_manager"/>
+                    <button name="action_resolve" string="Mark Resolved"
+                        type="object" class="btn-success"
+                        invisible="state not in ('assigned', 'in_progress')"
+                        groups="asset_management.group_asset_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id" options="{'no_create': True}"/>
+                            <field name="asset_tag" readonly="1"/>
+                            <field name="requested_by" readonly="1"/>
+                            <field name="employee_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="priority" widget="badge"/>
+                            <field name="technician_id" options="{'no_create': True}"
+                                invisible="state in ('pending', 'resolved', 'rejected')"
+                                readonly="0"
+                                groups="asset_management.group_asset_manager"/>
+                            <field name="approved_by" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Describe the issue..."/>
+                    </group>
+                    <group invisible="not photo">
+                        <field name="photo" widget="image" readonly="1"/>
+                    </group>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="pending,approved,in_progress,resolved" readonly="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- MAINTENANCE LIST VIEW                                         -->
+    <!-- ============================================================ -->
+
+    <record id="maintenance_list" model="ir.ui.view">
+        <field name="name">am.maintenance.request.list</field>
+        <field name="model">am.maintenance.request</field>
+        <field name="arch" type="xml">
+            <list string="Maintenance Requests">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="requested_by"/>
+                <field name="priority" widget="badge"/>
+                <field name="technician_id"/>
+                <field name="state" widget="badge"
+                    decoration-warning="state == 'pending'"
+                    decoration-success="state == 'resolved'"
+                    decoration-danger="state in ('in_progress', 'assigned')"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- MAINTENANCE SEARCH VIEW                                       -->
+    <!-- ============================================================ -->
+
+    <record id="maintenance_search" model="ir.ui.view">
+        <field name="name">am.maintenance.request.search</field>
+        <field name="model">am.maintenance.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Maintenance">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="asset_tag"/>
+                <field name="requested_by"/>
+                <field name="technician_id"/>
+                <separator/>
+                <filter name="filter_pending" string="Pending" domain="[('state', '=', 'pending')]"/>
+                <filter name="filter_active" string="In Progress" domain="[('state', 'in', ('approved', 'assigned', 'in_progress'))]"/>
+                <filter name="filter_resolved" string="Resolved" domain="[('state', '=', 'resolved')]"/>
+                <separator/>
+                <filter name="filter_critical" string="Critical" domain="[('priority', '=', 'critical')]"/>
+                <filter name="filter_high" string="High Priority" domain="[('priority', '=', 'high')]"/>
+                <group name="group_by">
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_priority" string="Priority" context="{'group_by': 'priority'}"/>
+                    <filter name="group_technician" string="Technician" context="{'group_by': 'technician_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- MAINTENANCE ACTION                                            -->
+    <!-- ============================================================ -->
+
+    <record id="maintenance_action" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">am.maintenance.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="maintenance_search"/>
+    </record>
+
+    <record id="maintenance_action_pending" model="ir.actions.act_window">
+        <field name="name">Pending Maintenance</field>
+        <field name="res_model">am.maintenance.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="maintenance_search"/>
+        <field name="domain">[('state', '=', 'pending')]</field>
+    </record>
+
+</odoo>
